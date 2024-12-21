@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DataClasses.MainActivity"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:id="@+id/guidlineTop"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidlineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineStart"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="vertical"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineEnd"
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/introviewpager2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guidlineTop"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toTopOf="@id/indicator"
+
+
+        />
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/indicator"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="30dp"
+        app:ci_drawable="@drawable/circleindicatorrselected"
+        app:ci_drawable_unselected="@drawable/circleindicatore"
+    app:layout_constraintBottom_toTopOf="@id/Nextbtn"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toTopOf="@id/Skip"
+        android:id="@+id/Nextbtn"
+        android:layout_marginBottom="35dp"
+        android:text="Next"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:background="@drawable/mainbuttonbackground"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Skip"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidlineBottom"
+        android:textColor="#646982"
+        android:textSize="16sp"
+        android:id="@+id/Skip"
+        android:layout_marginBottom="37dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

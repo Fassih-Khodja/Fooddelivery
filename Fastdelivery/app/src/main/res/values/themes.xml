@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <!-- Base application theme -->
+    <style name="Base.Theme.FastDelivery" parent="Theme.Material3.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/signuptransition
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/signuptransition
+        </item>
+    </style>
+
+    <style name="Theme.FastDelivery" parent="Base.Theme.FastDelivery" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+    </style>
+    <style name="ImageView.Corner" parent="">
+        <item name="cornerSize">15%</item>
+    </style>
+
+</resources>

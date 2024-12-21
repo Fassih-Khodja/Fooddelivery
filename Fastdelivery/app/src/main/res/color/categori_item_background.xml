@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:color="#FFD27C">
+    </item>
+
+    <!-- Color when the card is selected (optional) -->
+    <item android:state_selected="true" android:color="#FFD27C">
+    </item>
+
+    <!-- Default color when the card is in normal state -->
+    <item android:color="@color/white">
+    </item>
+</selector>
