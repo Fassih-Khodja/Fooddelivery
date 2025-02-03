@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "230878254490",
+    "project_id": "fastdelivery-1",
+    "storage_bucket": "fastdelivery-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230878254490:android:47d0191d204126a7d09623",
+        "android_client_info": {
+          "package_name": "com.example.fastdelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_onWddqeyYjYYMaw5pBZQg6GD_moGvYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

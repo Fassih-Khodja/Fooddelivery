@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/foodimage"
+        android:layout_width="136dp"
+        android:layout_height="117dp"
+        android:src="@drawable/introimage2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageView.Corner"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/foodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pizza Hut"
+        android:textColor="#181C2E"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/foodimage"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+    <TextView
+        android:id="@+id/foodpricetotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="640 DA"
+        android:textColor="#181C2E"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/foodimage"
+        app:layout_constraintTop_toBottomOf="@id/foodname"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/foodimage"
+        app:layout_constraintTop_toBottomOf="@id/foodpricetotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="03 Items"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
+        android:textColor="#6B6E82"
+        android:textSize="12sp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

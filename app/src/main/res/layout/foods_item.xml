@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/foodimage"
+        android:layout_width="match_parent"
+        android:layout_height="137dp"
+android:src="@drawable/introimage2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        android:theme="@style/ImageView.Corner"
+       />
+
+    <TextView
+        android:id="@+id/foodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheez Burger"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodimage"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/foodprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 DZ"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodname"
+        android:layout_marginTop="6dp"/>
+    <ImageView
+        android:id="@+id/startimage"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodprice"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/star_food"
+        />
+    <TextView
+        android:id="@+id/star_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/foodprice"
+        app:layout_constraintStart_toEndOf="@id/startimage"
+        android:text="5.0"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <ImageView
+        android:id="@+id/foodclock"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/clock_food"
+        app:layout_constraintTop_toBottomOf="@id/foodprice"
+        app:layout_constraintStart_toEndOf="@id/star_text"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="18dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/foodprice"
+        app:layout_constraintStart_toEndOf="@id/foodclock"
+        android:text="20 min"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="4dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    
+
+</androidx.constraintlayout.widget.ConstraintLayout>
