@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Search">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidlineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineStart"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="vertical"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineEnd"
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"
+        />
+    <SearchView
+        android:id="@+id/searchview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guidlineTop"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        android:background="#F6F6F6"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search food..."
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchrecyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+       app:layout_constraintTop_toBottomOf="@id/searchview"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

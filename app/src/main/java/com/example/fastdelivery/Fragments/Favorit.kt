@@ -1,16 +1,20 @@
 package com.example.fastdelivery.Fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fastdelivery.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.fastdelivery.Adapters.FavoritAdapter
+import com.example.fastdelivery.Models.DataClasses.Food
+import com.example.fastdelivery.databinding.FragmentFavoritBinding
 
 class Favorit : Fragment() {
-
-
+    private lateinit var binding: FragmentFavoritBinding
+    private lateinit var recyclerviewfavorite: RecyclerView
+    private lateinit var favoriteadapter: FavoritAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -20,18 +24,28 @@ class Favorit : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorit, container, false)
+        binding = FragmentFavoritBinding.inflate(inflater, container, false)
+
+        return binding.root
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("YourFragmentfavorite", "Fragment view is being destroyed maybe its backstack")
-        // Set binding to null to avoid memory leaks
-        //  binding = null
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val l= arrayListOf(Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
+        ,Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
+        ,Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
+        ,Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
+        ,Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""))
+recyclerviewfavorite=binding.favoriterecyclerview
+        favoriteadapter=FavoritAdapter(l)
+        recyclerviewfavorite.adapter=favoriteadapter
+       // val spaceItemDecoration = Decoration_Items(5,recyclerviewfavorite)
+      //  recyclerviewfavorite.addItemDecoration(spaceItemDecoration)
+
+        recyclerviewfavorite.layoutManager=  GridLayoutManager(context, 2)
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("YourFragmentfavorite", "Fragment is being destroyed")
-        // At this point, the fragment is being removed from memory
+
     }
-}
