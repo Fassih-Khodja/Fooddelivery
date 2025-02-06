@@ -2,11 +2,12 @@ package com.example.fastdelivery.Fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ import com.example.fastdelivery.Models.DataClasses.Food
 import com.example.fastdelivery.Models.Repositories.Categorie_repository
 import com.example.fastdelivery.Models.Repositories.Food_repository
 import com.example.fastdelivery.R
+import com.example.fastdelivery.ViewModels.Favorit_viewmodel
 import com.example.fastdelivery.ViewModels.Home_view_model
 import com.example.fastdelivery.databinding.FragmentHomeFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,6 +47,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var BestsellerAdapter: bestsellerAdapter
     private lateinit var foodAdapter: FoodAdapter
+    private val modelFavorit: Favorit_viewmodel by activityViewModels()
      val firestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +81,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
 
 
 // initialise of viewmodel with argument repository
-    model= ViewModelProvider(this, Home_view_model.Factory(catrepository,foodrepository)).get(Home_view_model::class.java)
+    model= ViewModelProvider(requireActivity(), Home_view_model.Factory(catrepository,foodrepository)).get(Home_view_model::class.java)
 
 
 
@@ -108,6 +111,14 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
 
 
 
+    modelFavorit.favoritfoodlist.observe(viewLifecycleOwner){newfavoritlist->
+        Log.d("the observe",newfavoritlist.toString())
+        if (newfavoritlist != null) {
+
+
+        }
+    }
+
 
 
 
@@ -119,7 +130,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     recyclerviewfoods.layoutManager=LinearLayoutManager(context)
 
     model.foodlist.observe(viewLifecycleOwner) { foods ->
-        // every time the categorieslist changed this get called to change the ui component (in our case the recyclerview)
+        // every time the foodlist changed this get called to change the ui component (in our case the recyclerview)
         // the observer doesn't work alone he work with livedata
         if (foods != null) {
             Log.d("null","the food are not null")

@@ -10,5 +10,5 @@ data class Food(
     val price:Int=0,
     val categorie:String="",
     val bestseller:Boolean=false,
-   val imageUrl: String=""
+    val imageUrl: String=""
 ): Parcelable

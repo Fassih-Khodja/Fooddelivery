@@ -28,6 +28,10 @@ class FavoritAdapter (var l:List<Food>?): RecyclerView.Adapter<Favoritviewholder
     override fun getItemCount(): Int {
         return l?.size ?: 0
     }
+    fun updatefavoritfoodlist(newlist:List<Food>){
+        l=newlist
+        notifyDataSetChanged()
+    }
 
 }
 class Favoritviewholder(itemView: View): RecyclerView.ViewHolder(itemView){ // this is the class of view holder

@@ -1,23 +1,29 @@
 package com.example.fastdelivery.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fastdelivery.Adapters.SearchAdapter
-import com.example.fastdelivery.Models.DataClasses.Food
+import com.example.fastdelivery.Models.Repositories.Categorie_repository
+import com.example.fastdelivery.Models.Repositories.Food_repository
+import com.example.fastdelivery.ViewModels.Home_view_model
 import com.example.fastdelivery.databinding.FragmentSearchBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Search : Fragment() {
 private lateinit var binding:FragmentSearchBinding
     private lateinit var recyclerviewsearch: RecyclerView
     private lateinit var searchapater: SearchAdapter
     private lateinit var searchview: SearchView
+    private lateinit var model: Home_view_model
+    val firestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,26 +40,16 @@ private lateinit var binding:FragmentSearchBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val l= arrayListOf(
-            Food(name = "test1", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test2", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
-            ,
-            Food(name = "test33", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test3", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test34", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test4", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
-            ,
-            Food(name = "test14", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test41", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
-            ,
-            Food(name = "test56454", price = 10, categorie = "Pizza", bestseller = false, imageUrl = ""),
-            Food(name = "test6", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
-            ,
-            Food(name = "test", price = 10, categorie = "Pizza", bestseller = false, imageUrl = "")
-        )
+        val catrepository = Categorie_repository(firestore)
+        val foodrepository= Food_repository(firestore)
+        model= ViewModelProvider(requireActivity(), Home_view_model.Factory(catrepository,foodrepository)).get(Home_view_model::class.java)
+        // using require activity i don't have to fetch again the foodlist
+
+Log.d("test",model.foodlistAll.toString())
+
         searchview=binding.searchview
         recyclerviewsearch=binding.searchrecyclerview
-        searchapater= SearchAdapter(l)
+        searchapater= SearchAdapter(model.foodlistAll)
         recyclerviewsearch.adapter=searchapater
         // val spaceItemDecoration = Decoration_Items(5,recyclerviewfavorite)
         //  recyclerviewfavorite.addItemDecoration(spaceItemDecoration)

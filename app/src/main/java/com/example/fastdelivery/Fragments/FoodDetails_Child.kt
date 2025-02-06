@@ -1,31 +1,31 @@
 package com.example.fastdelivery.Fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.fastdelivery.Activities.DataClasses.My_Cart
+import coil.load
 import com.example.fastdelivery.Models.DataClasses.Cart
 import com.example.fastdelivery.Models.DataClasses.Food
+import com.example.fastdelivery.R
+import com.example.fastdelivery.ViewModels.Favorit_viewmodel
 import com.example.fastdelivery.ViewModels.FoodDetails_viewmodel
 import com.example.fastdelivery.ViewModels.shared_VM_ActNav_FragFoodDetails
 import com.example.fastdelivery.databinding.FragmentFoodDetailsChildBinding
-import android.app.Activity
-import coil.load
-import com.example.fastdelivery.Activities.DataClasses.SignUpActivity
 
 
 class FoodDetails_Child : Fragment() {
     private lateinit var binding:FragmentFoodDetailsChildBinding
     private lateinit var sharedmodel: shared_VM_ActNav_FragFoodDetails
     private val model: FoodDetails_viewmodel by viewModels()
+    private val modelfavorit: Favorit_viewmodel by activityViewModels()
+
     private  var item_dataclass: Food? =null
     private var quantity:Int=1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,8 @@ class FoodDetails_Child : Fragment() {
         // Set the transition name dynamically based on the position passed
         val position = arguments?.getInt("position")
         item_dataclass = arguments?.getParcelable("dataclass")
+
+
         binding.imageFoodDetail.transitionName = "image_$position"
         binding.imageFoodDetail.load(item_dataclass?.imageUrl)
         binding.nameFoodDetails.text=item_dataclass?.name
@@ -59,6 +61,53 @@ class FoodDetails_Child : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        item_dataclass?.let {
+            if(    modelfavorit.isfoodfavorit(it)){
+                binding.favoriteBtn.setImageResource(R.drawable.favorite_btn_icon)
+                binding.favoriteBtn.tag = R.drawable.favorite_btn_icon}
+        }
+        binding.favoriteBtn.setOnClickListener {
+            // Get the current drawable resource ID
+            val currentImage = binding.favoriteBtn.tag as? Int ?: R.drawable.favorite_btn_icon_notchecked
+Log.d("curentimage",currentImage.toString())
+            // Toggle between heart filled and heart empty
+            val newImage = if (currentImage == R.drawable.favorite_btn_icon_notchecked) { // here it will take the last line of code inside the if-
+                item_dataclass?.let { it1 -> modelfavorit.addfoodfavorit(it1) }
+                Log.d("the after addfood", "im here")
+
+                R.drawable.favorite_btn_icon
+            } else {
+                item_dataclass?.let { it1 -> modelfavorit.removefoodfromfavorit(it1) }
+                Log.d("the after removefood", "im here")
+
+                R.drawable.favorite_btn_icon_notchecked
+            }
+            Log.d("newimage",newImage.toString())
+            // Update the button image
+
+            binding.favoriteBtn.animate()
+                .scaleX(1.3f)  // Scale up
+                .scaleY(1.3f)
+                .setDuration(150)
+                .withEndAction {
+                    Log.d("animate","the setimage is called")
+                    binding.favoriteBtn.setImageResource(newImage) // Change image after scaling up
+
+                    binding.favoriteBtn.animate()
+                        .scaleX(1f)  // Scale back to normal
+                        .scaleY(1f)
+                        .setDuration(150)
+                        .start()
+                }.start()
+
+            // Store the current state using tag
+            // the tag is used just to store the state
+            binding.favoriteBtn.tag = newImage
+        }
+
+
+
+
 
 
         // the observe method should be on the onViewCreated

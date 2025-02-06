@@ -50,17 +50,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"
             android:theme="@style/ImageView.Corner"
                 android:transitionName="image_food_transition"
                 android:scaleType="centerCrop"/>
             <ImageButton
+                android:id="@+id/favorite_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/selectore_for_favoriteicon"
+                android:src="@drawable/favorite_btn_icon_notchecked"
                 android:background="@android:color/transparent"
                 />
 
