@@ -8,10 +8,11 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.fastdelivery.Models.DataClasses.Food
 import com.example.fastdelivery.R
 
-class SearchAdapter (var l:List<Food>?): RecyclerView.Adapter<Searchviewholder>(), Filterable {
+class SearchAdapter (var l:List<Food>?,private val listner:searchitemclicklistner): RecyclerView.Adapter<Searchviewholder>(), Filterable {
     private var filteredList = l?.toMutableList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Searchviewholder {
 
@@ -21,9 +22,14 @@ class SearchAdapter (var l:List<Food>?): RecyclerView.Adapter<Searchviewholder>(
 
     override fun onBindViewHolder(holder: Searchviewholder, position: Int) {
 
-       // holder.image.load(l?.get(position)?.imageUrl)
+        holder.image.load(l?.get(position)?.imageUrl)
         holder.name.text= filteredList?.get(position)?.name ?: ""
-        // holder.image.transitionName = "image_$position"
+         holder.image.transitionName = "image_s$position"
+        holder.itemView.setOnClickListener {
+
+            l?.get(position)?.let { it1 -> listner.searchonitemclick(position, it1,holder.image) }
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -59,4 +65,7 @@ class Searchviewholder(itemView: View): RecyclerView.ViewHolder(itemView){ // th
 
     //val stars=itemView.findViewById<TextView>(R.id.star_text)
 
+}
+interface searchitemclicklistner{
+    fun searchonitemclick(position:Int,dataclass_item:Food,imageView: ImageView)
 }

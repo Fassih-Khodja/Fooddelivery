@@ -36,5 +36,9 @@
         android:name="com.example.fastdelivery.Fragments.Search"
         android:label="Search"
         >
+        <action
+            android:id="@+id/action_searchFragment_to_foodDetailsChild"
+            app:destination="@id/foodDetailsChild"
+            />
     </fragment>
 </navigation>

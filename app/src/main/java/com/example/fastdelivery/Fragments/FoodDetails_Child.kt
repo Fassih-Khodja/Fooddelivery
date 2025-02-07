@@ -30,8 +30,9 @@ class FoodDetails_Child : Fragment() {
     private var quantity:Int=1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+       sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
         // setting up the viewmodel
         sharedmodel= ViewModelProvider(requireActivity()).get(shared_VM_ActNav_FragFoodDetails::class.java)
         // this is the method that make this viewmodel instance and the instance that i called on the activity would be the same instance
@@ -47,10 +48,21 @@ class FoodDetails_Child : Fragment() {
 
         // Set the transition name dynamically based on the position passed
         val position = arguments?.getInt("position")
+        val source=arguments?.getString("source")
         item_dataclass = arguments?.getParcelable("dataclass")
 
-
-        binding.imageFoodDetail.transitionName = "image_$position"
+        item_dataclass?.let {
+            if(    modelfavorit.isfoodfavorit(it)){
+                binding.favoriteBtn.setImageResource(R.drawable.favorite_btn_icon)
+                binding.favoriteBtn.tag = R.drawable.favorite_btn_icon}
+        }
+        if ( source=="foodlist"){
+        binding.imageFoodDetail.transitionName = "image_$position"}
+        else if(source=="bestseller") {
+            binding.imageFoodDetail.transitionName = "image_b$position"
+        }else {
+            binding.imageFoodDetail.transitionName = "image_s$position"
+        }
         binding.imageFoodDetail.load(item_dataclass?.imageUrl)
         binding.nameFoodDetails.text=item_dataclass?.name
         binding.totalpriceFoodDetail.text=item_dataclass?.price.toString()
@@ -61,11 +73,7 @@ class FoodDetails_Child : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        item_dataclass?.let {
-            if(    modelfavorit.isfoodfavorit(it)){
-                binding.favoriteBtn.setImageResource(R.drawable.favorite_btn_icon)
-                binding.favoriteBtn.tag = R.drawable.favorite_btn_icon}
-        }
+
         binding.favoriteBtn.setOnClickListener {
             // Get the current drawable resource ID
             val currentImage = binding.favoriteBtn.tag as? Int ?: R.drawable.favorite_btn_icon_notchecked

@@ -242,6 +242,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
        val bundle = Bundle().apply {
             putInt("position", position)
             putParcelable("dataclass",dataclass_item) // pass the data class
+           putString("source","foodlist")
         }
 
         val extras = FragmentNavigatorExtras(imageView to "image_$position") //should i use this ?
@@ -257,9 +258,10 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
         val bundle = Bundle().apply {
             putInt("position", position)
             putParcelable("dataclass",dataclass_item) // pass the data class
+            putString("source","bestseller")
         }
 
-        val extras = FragmentNavigatorExtras(imageView to "image_$position") //should i use this ?
+        val extras = FragmentNavigatorExtras(imageView to "image_b$position") //should i use this ?
         findNavController().navigate(
             R.id.action_homeFragment_to_foodDetailsChild,
             bundle,  // Bundle args (if any)
