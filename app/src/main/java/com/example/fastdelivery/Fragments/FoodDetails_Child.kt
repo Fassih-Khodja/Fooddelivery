@@ -153,6 +153,5 @@ Log.d("curentimage",currentImage.toString())
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("destroy","the food details get destroyed")
     }
 }

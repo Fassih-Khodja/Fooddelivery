@@ -33,6 +33,7 @@
         app:layout_constraintGuide_percent="0.95"
         android:orientation="vertical"
         />
+
     <TextView
         android:id="@+id/carttext"
         android:layout_width="wrap_content"
@@ -70,6 +71,54 @@
         android:backgroundTint="#F0F5FA"
         android:layout_marginBottom="-17dp"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Address"
+            android:textColor="#A0A5BA"
+            android:textSize="16sp"
+            android:layout_gravity="top|start"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="25dp"/>
+        <TextView
+            android:id="@+id/edit_text_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIT"
+android:textColor="#FF7622"
+            android:textSize="16sp"
+            android:layout_gravity="top|end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:id="@+id/text_current_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="YOUR LOCATION HERE"
+            android:textColor="#7B7F8E"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="60dp"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="5dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="14sp"
+            android:layout_marginHorizontal="28dp"
+            android:background="#E7EFF6"
+android:textStyle="normal"
+            android:maxLines="2"
+            />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Total: "
+    android:layout_gravity="center_vertical|start"
+    android:layout_marginStart="25dp"
+    android:textColor="#A0A5BA"
+    android:textSize="18sp"
+    />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/placeorderbtn"
             android:layout_width="match_parent"

@@ -8,15 +8,17 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Splahs_view_model:ViewModel() {
     val isUserloging=MutableLiveData<Boolean>()
+    val isrequestpermissionlocationended = MutableLiveData<Boolean>()
     init { // runs when instance of this class get called
        checkUser()
     }
+
+
 
     private fun checkUser() {
         viewModelScope.launch {
@@ -40,4 +42,8 @@ class Splahs_view_model:ViewModel() {
 
        }
     }
-}}
+}
+    fun onLocationPermissionResult() {
+        isrequestpermissionlocationended.value = true
+    }
+}

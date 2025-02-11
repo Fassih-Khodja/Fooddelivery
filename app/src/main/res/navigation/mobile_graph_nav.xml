@@ -12,6 +12,11 @@
         <action
             android:id="@+id/action_homeFragment_to_foodDetailsChild"
             app:destination="@id/foodDetailsChild"
+            app:launchSingleTop="true"
+        app:popUpTo="@id/home"
+        app:popUpToInclusive="false"
+        app:popUpToSaveState="true"
+        app:restoreState="true"
             />
     </fragment>
     <fragment

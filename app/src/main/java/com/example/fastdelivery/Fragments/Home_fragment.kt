@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,7 +72,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+    Log.d("test fragment","the fragment has been created view 2.. ")
     // initialize of repositories
     val catrepository = Categorie_repository(firestore)
     val foodrepository=Food_repository(firestore)
@@ -245,11 +246,15 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
            putString("source","foodlist")
         }
 
-        val extras = FragmentNavigatorExtras(imageView to "image_$position") //should i use this ?
+        val extras = FragmentNavigatorExtras(imageView to "image_$position") //should i use this ? this is shared element
         findNavController().navigate(
             R.id.action_homeFragment_to_foodDetailsChild,
             bundle,  // Bundle args (if any)
-            null,  // NavOptions (if any)
+            NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setPopUpTo(R.id.home, inclusive = false)
+                .setRestoreState(true)
+                .build(),  // NavOptions (if any)
             extras  // Shared element transition
         )
     }

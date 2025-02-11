@@ -70,4 +70,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")// this is for courountines
     implementation(platform("androidx.compose:compose-bom:2024.09.03"))
     implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
