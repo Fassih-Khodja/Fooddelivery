@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="ManifestOrder" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,12 +18,15 @@
         android:theme="@style/Theme.FastDelivery"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.DataClasses.Add_Location"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DataClasses.My_Cart"
             android:exported="true" />
         <activity
             android:name=".Activities.DataClasses.Navigation_Activity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".Activities.DataClasses.Code_verification"
             android:exported="false" />
@@ -38,13 +46,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCwZrIomcK5s690SxN349DWlwmg5V30i0I" />
-
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
-        tools:ignore="ManifestOrder" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 </manifest>

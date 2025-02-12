@@ -27,7 +27,7 @@ private lateinit var introslideradapter: IntroSliderAdapter
     private var passcheckpermission=false
     private lateinit var splashScreen: SplashScreen
     companion object {
-        private const val REQUEST_LOCATION_PERMISSION = 1001
+        const val REQUEST_LOCATION_PERMISSION = 1001
     }
     override fun onCreate(savedInstanceState: Bundle?) {
 

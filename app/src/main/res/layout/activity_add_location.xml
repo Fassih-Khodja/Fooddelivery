@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DataClasses.Add_Location">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textadress"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineTop"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidlineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineStart"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="vertical"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineEnd"
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"
+        />
+<TextView
+    android:id="@+id/textadress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Address"
+    android:textSize="16sp"
+    android:textColor="#32343E"
+    app:layout_constraintTop_toBottomOf="@+id/map"
+    app:layout_constraintStart_toStartOf="@id/guidlineStart"
+    android:layout_marginTop="25dp"
+    android:layout_marginStart="10dp"
+    />
+    <TextView
+        android:id="@+id/text_current_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="YOUR LOCATION HERE"
+        android:textColor="#7B7F8E"
+        android:textSize="15sp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="5dp"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeMinTextSize="14sp"
+        android:background="#E7EFF6"
+        android:textStyle="normal"
+        android:maxLines="2"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textadress"
+        android:layout_marginTop="10dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/savelocationbtn"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:background="@drawable/mainbuttonbackground"
+        android:text="Save location"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/text_current_location"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidlineBottom"
+        android:layout_marginHorizontal="10dp"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

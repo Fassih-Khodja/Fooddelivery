@@ -5,12 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -25,8 +27,6 @@ import com.example.fastdelivery.Models.Repositories.Orderschange_repository
 import com.example.fastdelivery.ViewModels.MyOrders_view_model
 import com.example.fastdelivery.databinding.ActivityMyCartBinding
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,14 +38,32 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
     private lateinit var cartadapter:MyCartAdapter
     private lateinit var model: MyOrders_view_model
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
-    private lateinit var locationCallback: LocationCallback
     private lateinit var spannable: Spannable
+    private lateinit var location:Location
     val db = FirebaseFirestore.getInstance()
     val auth= FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val  resultLauncher = registerForActivityResult(
+            // here i will register the launcher with a contract. A contract defines what type of result you're expecting
+            // in my case the type is a startactivity for result
+            ActivityResultContracts.StartActivityForResult()
+        ) { result -> // this is a callback executed every time the activity do (set result) , and will not executed on the first time
+            if (result.resultCode == Activity.RESULT_OK) {
+                Log.d("the result.code","good")
+                //here i will Handle the result here
+                val data = result.data
+                //result.data retrieves the Intent that was sent back from the second activity. This Intent contains any data that was passed using setResult() from the second activity.
+                val choosenlocation = data?.getParcelableExtra<Location>("savedlocation")
+                if (choosenlocation != null) {
+                    setlocation(choosenlocation)
+                }
+            } else  Log.d("the result.code","bad")
+        }
+
+
         binding=ActivityMyCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -79,6 +97,12 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
             cartlist= arrayListOf()
         }
 
+        binding.editTextBtn.setOnClickListener {
+            val intent=Intent(this,Add_Location::class.java)
+           // startActivity(intent)
+            resultLauncher.launch(intent)
+        }
+
 
     }
 
@@ -99,16 +123,7 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
         } else {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
-                if (location != null) {
-                    val latitude = location.latitude
-                    val longitude = location.longitude
-                    Log.d("Location", "Lat: $latitude, Lng: $longitude")
-
-                    val address = getAddress(latitude, longitude)
-                    binding.textCurrentLocation.text = address
-                } else {
-                    binding.textCurrentLocation.text = "Location not found,Please add your location"
-                }
+               setlocation(location)
             }
             .addOnFailureListener { e ->
                 Log.e("Location Error", "Failed to get location: ${e.message}")
@@ -139,6 +154,15 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
         } catch (e: Exception) {
             "Unable to get address"
         }
+    }
+    private fun setlocation(location: Location){ // maybe its better to use viewmodel
+        Log.d("setlocation","setlocation get called")
+        if (location != null) {
+            val latitude = location.latitude
+            val longitude = location.longitude
+            val address = getAddress(latitude, longitude)
+            binding.textCurrentLocation.text = address
+        } else binding.textCurrentLocation.text = "Location not found,Please add your location"
     }
 
     override fun finish() {
