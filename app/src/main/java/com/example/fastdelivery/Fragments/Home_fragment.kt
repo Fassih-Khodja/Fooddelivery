@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -29,7 +28,6 @@ import com.example.fastdelivery.Models.DataClasses.Food
 import com.example.fastdelivery.Models.Repositories.Categorie_repository
 import com.example.fastdelivery.Models.Repositories.Food_repository
 import com.example.fastdelivery.R
-import com.example.fastdelivery.ViewModels.Favorit_viewmodel
 import com.example.fastdelivery.ViewModels.Home_view_model
 import com.example.fastdelivery.databinding.FragmentHomeFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -48,7 +46,6 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var BestsellerAdapter: bestsellerAdapter
     private lateinit var foodAdapter: FoodAdapter
-    private val modelFavorit: Favorit_viewmodel by activityViewModels()
      val firestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,13 +109,6 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
 
 
 
-    modelFavorit.favoritfoodlist.observe(viewLifecycleOwner){newfavoritlist->
-        Log.d("the observe",newfavoritlist.toString())
-        if (newfavoritlist != null) {
-
-
-        }
-    }
 
 
 

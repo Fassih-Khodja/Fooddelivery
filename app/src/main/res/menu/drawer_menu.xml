@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <group>
+        <item
+            android:title="Home"
+            android:id="@+id/main_container"
+            android:icon="@drawable/home_ic"
+            android:checked="true"/>
+        <item
+            android:title="My Profile"
+            android:id="@+id/profile"
+            android:icon="@drawable/profile_ic_item_nav_drawer"/>
+        <item
+            android:title="Notification"
+            android:id="@+id/notification"
+            android:icon="@drawable/notification_ic_item_nav_draw"/>
+    </group>
     <item
-        android:title="Profile"
-        android:id="@+id/profile_nav_menu"/>
-    <item
-        android:title="Home"
-        android:id="@+id/home_nav_menu"/>
-    <item
-        android:title="My Orders"
-        android:id="@+id/Ordrers_nav_menu"/>
+        android:title=""
+        >
+        <menu>
+            <item
+                android:title="Settings"
+                android:id="@+id/settings"/>
+            <item
+                android:title="About us"
+                android:id="@+id/about_us"/>
+            <item
+                android:title="privacy policy"
+                android:id="@+id/privacy"/>
+        </menu>
+
+    </item>
 
 </menu>

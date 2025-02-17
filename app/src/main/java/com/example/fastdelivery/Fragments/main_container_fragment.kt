@@ -1,125 +1,95 @@
-package com.example.fastdelivery.Activities.DataClasses
+package com.example.fastdelivery.Fragments
 
-import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.fastdelivery.Activities.DataClasses.My_Cart
+import com.example.fastdelivery.Models.DataClasses.Cart
 import com.example.fastdelivery.R
 import com.example.fastdelivery.ViewModels.shared_VM_ActNav_FragFoodDetails
-import com.example.fastdelivery.databinding.ActivityNavigationBinding
+import com.example.fastdelivery.databinding.FragmentMainContainerFragmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-// remarque , i'm using nvigation component to navigate ...
 
-class Navigation_Activity : AppCompatActivity() {
-    lateinit var binding: ActivityNavigationBinding
+class main_container_fragment : Fragment() {
+    private lateinit var binding: FragmentMainContainerFragmentBinding
     private lateinit var navController: NavController
+private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    val model: shared_VM_ActNav_FragFoodDetails by viewModels()
 
-    // setting up the viewmodel
-     val model: shared_VM_ActNav_FragFoodDetails by viewModels()
-    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-    /*  val  resultLauncher = registerForActivityResult(
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentMainContainerFragmentBinding.inflate(inflater, container, false)
+         resultLauncher = registerForActivityResult(
             // here i will register the launcher with a contract. A contract defines what type of result you're expecting
             // in my case the type is a startactivity for result
             ActivityResultContracts.StartActivityForResult()
         ) { result -> // this is a callback executed every time the activity do (set result) , and will not executed on the first time
-          Log.d("the result","the result get called")
+            Log.d("the result", "the result get called")
             if (result.resultCode == Activity.RESULT_OK) {
-                Log.d("the result.code","good")
+                Log.d("the result.code", "good")
                 //here i will Handle the result here
                 val data = result.data
                 //result.data retrieves the Intent that was sent back from the second activity. This Intent contains any data that was passed using setResult() from the second activity.
                 val updatedData = data?.getParcelableArrayListExtra<Cart>("CartList2")
-                model.cartlist.value=updatedData
-            } else  Log.d("the result.code","bad")
-        }*/
-        binding=ActivityNavigationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+                model.cartlist.value = updatedData
+            } else Log.d("the result.code", "bad")
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
 
 
 
-        // this is the bottom navigation bar
-      //  val navView: BottomNavigationView = binding.bottomNavigation
-      //  NavHostFragment: It is the container fragment that holds your navigation graph
-        // this is access to the FragmentManager by supportFragmentManager
-      //  supportFragmentManager.commit { addToBackStack("test") }
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
-
-        // the fragment container is our navhostfragment
+        val navView: BottomNavigationView = binding.bottomNavigation
+        val navHostFragment =
+            childFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
-
-
-        // Set up Bottom Navigation Bar with NavController
-        // there is this on the documentation
-       // navView.setupWithNavController(navController)
-       /* navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.foodDetailsChild -> {
                     navView.menu.findItem(R.id.home).isChecked = true
                 }
 
                 // Add more cases for other bottom nav fragments if necessary
-            }*/
-
-
-/*binding.btncart.setOnClickListener {
-    Log.d("the acttivity","btn test")
-    val intent = Intent(this, My_Cart::class.java)
-    val cartList = model.cartlist.value ?: arrayListOf()
-    intent.putParcelableArrayListExtra("CartList",ArrayList(cartList) )
-    resultLauncher.launch(intent)
-}*/
-
-
-
-
-            binding.btnmenu.setOnClickListener {
-                binding.myDrawerLayout.openDrawer(GravityCompat.START)
-            }
-            binding.navView.setNavigationItemSelectedListener { menuItem ->
-                val menu = binding.navView.menu
-                for (i in 0 until menu.size()) {
-                    val menuItem1 = menu.getItem(i)
-                    menuItem1.isChecked = (menuItem1.itemId == menuItem.itemId)
-                }
-                when (menuItem.itemId) {
-                    R.id.main_container -> {
-                        Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.main_container)
-                    }
-                    R.id.profile -> {
-                        Toast.makeText(this, "Profile Clicked", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.profile)
-                    }
-                    R.id.notification -> {
-                        Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show()
-                    }
-else->false
-                }
-                binding.myDrawerLayout.closeDrawer(GravityCompat.START) // Close drawer after selection
-                true
             }
 
+        }
+
+        binding.btncart.setOnClickListener {
+            Log.d("the acttivity", "btn test")
+            val intent = Intent(requireContext(), My_Cart::class.java)
+            val cartList = model.cartlist.value ?: arrayListOf()
+            intent.putParcelableArrayListExtra("CartList", ArrayList(cartList))
+            resultLauncher.launch(intent)
+        }
 
 
-
-    }
-
-
-
-
-
-
-      /*  fun isFragmentInBackstack(navController: NavController, destinationId: Int): Boolean {
+        fun isFragmentInBackstack(navController: NavController, destinationId: Int): Boolean {
             return try {
                 navController.getBackStackEntry(destinationId)
                 Log.d("it's true","true")
@@ -128,10 +98,10 @@ else->false
             } catch (e: IllegalArgumentException) {
                 false // If exception is thrown, the fragment is not in the backstack
             }
-        }*/
+        }
 
 
-    /*   navView.setOnItemSelectedListener { item ->
+        navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
                     if(isFragmentInBackstack(navController, R.id.foodDetailsChild)){
@@ -179,6 +149,7 @@ else->false
             }
         }
 
+
         navView.setOnItemReselectedListener {  item -> /// this when reselected and you are on it
             when (item.itemId) {
                 R.id.home -> {
@@ -191,34 +162,8 @@ else->false
                     true
                 }
 
+            }
         }
+
     }
-
-
-}*/
-
-    override fun onResume() {
-        super.onResume()
-    }
-    override fun onBackPressed() {
-        // Close drawer if open, otherwise exit app
-        if (binding.myDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.myDrawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-
 }
-
-
-// explication about how he know which distination
-/*Tie destinations to menu items
-NavigationUI also provides helpers for tying destinations to menu-driven UI components.
- NavigationUI contains a helper method, onNavDestinationSelected(),
-  which takes a MenuItem along with the NavController that hosts the associated destination.
-   If the id of the MenuItem matches the id of the destination,
-   the NavController can then navigate to that destination.*/
-
-// remarque ,,pop off backstack means removing the fragment from the backstack
