@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DataClasses.Edit_Profile">
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineTop"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidlineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineStart"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="vertical"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidlineEnd"
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"
+        />
+
+    <TextView
+        android:id="@+id/editprofiletext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        app:layout_constraintTop_toTopOf="@id/guidlineTop"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        android:layout_marginStart="67dp"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo_profile"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintTop_toBottomOf="@id/editprofiletext"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/test"
+        />
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintTop_toBottomOf="@id/photo_profile"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/textfullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="16sp"
+             />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fullnamenputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F0F5FA"
+                app:boxStrokeWidth="0dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidthFocused="0.8dp"
+                app:boxStrokeColor="#FF7622"
+                app:hintEnabled="false"
+                app:cursorColor="#FF7622"
+                android:layout_marginTop="4dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:hint="enter your email"
+                    android:textColorHint="#A0A5BA"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:id="@+id/textemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textSize="16sp"
+             />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F0F5FA"
+                app:boxStrokeWidth="0dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidthFocused="0.8dp"
+                app:boxStrokeColor="#FF7622"
+                app:hintEnabled="false"
+                app:cursorColor="#FF7622"
+                android:layout_marginTop="4dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:hint="enter your email"
+                    android:textColorHint="#A0A5BA"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:id="@+id/textphonenumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PHONE NUMBER"
+                android:textSize="16sp"
+             />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phonenumberinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F0F5FA"
+                app:boxStrokeWidth="0dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidthFocused="0.8dp"
+                app:boxStrokeColor="#FF7622"
+                app:hintEnabled="false"
+                app:cursorColor="#FF7622"
+                android:layout_marginTop="4dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:hint="enter your email"
+                    android:textColorHint="#A0A5BA"
+                    android:inputType="phone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:id="@+id/textbio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BIO"
+                android:textSize="16sp"
+             />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bioinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F0F5FA"
+                app:boxStrokeWidth="0dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidthFocused="0.8dp"
+                app:boxStrokeColor="#FF7622"
+                app:hintEnabled="false"
+                app:cursorColor="#FF7622"
+                android:layout_marginTop="4dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="enter your email"
+                    android:textColorHint="#A0A5BA"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_edit_btn"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        app:layout_constraintStart_toStartOf="@id/guidlineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidlineBottom"
+        app:layout_constraintTop_toBottomOf="@id/linearlayout"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/mainbuttonbackground"
+        android:text="save"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

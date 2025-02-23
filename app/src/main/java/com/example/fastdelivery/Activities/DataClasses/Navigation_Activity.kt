@@ -2,6 +2,7 @@ package com.example.fastdelivery.Activities.DataClasses
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.fastdelivery.R
+import com.example.fastdelivery.ViewModels.Navigation_User_VM
 import com.example.fastdelivery.ViewModels.shared_VM_ActNav_FragFoodDetails
 import com.example.fastdelivery.databinding.ActivityNavigationBinding
 
@@ -21,6 +23,7 @@ class Navigation_Activity : AppCompatActivity() {
 
     // setting up the viewmodel
      val model: shared_VM_ActNav_FragFoodDetails by viewModels()
+    val user_model:Navigation_User_VM by viewModels()
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,22 @@ class Navigation_Activity : AppCompatActivity() {
         navController = navHostFragment.navController
 
 
+
+
+        val headerView= binding.navView.getHeaderView(0) // Get header view
+        val headername: TextView = headerView.findViewById(R.id.user_name_text_nav_draw)
+ val headeremail: TextView = headerView.findViewById(R.id.user_email_text_nav_draw)
+
+
+
+        user_model.userInfo.observe(this){ user ->
+            if (user != null) {
+                headername.text = user.full_name
+                headeremail.text = user.email
+            }
+        }
+
+
         // Set up Bottom Navigation Bar with NavController
         // there is this on the documentation
        // navView.setupWithNavController(navController)
@@ -85,20 +104,24 @@ class Navigation_Activity : AppCompatActivity() {
             binding.btnmenu.setOnClickListener {
                 binding.myDrawerLayout.openDrawer(GravityCompat.START)
             }
+
+
             binding.navView.setNavigationItemSelectedListener { menuItem ->
-                val menu = binding.navView.menu
-                for (i in 0 until menu.size()) {
-                    val menuItem1 = menu.getItem(i)
-                    menuItem1.isChecked = (menuItem1.itemId == menuItem.itemId)
-                }
+
                 when (menuItem.itemId) {
                     R.id.main_container -> {
                         Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.main_container)
+                        if (navController.currentDestination?.id != R.id.main_container) {
+                            navController.popBackStack(R.id.main_container, false) // Pop if exists
+                            navController.navigate(R.id.main_container) // Navigate only if not found
+                        }
                     }
                     R.id.profile -> {
                         Toast.makeText(this, "Profile Clicked", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.profile)
+                        if (navController.currentDestination?.id != R.id.profile) {
+                            navController.popBackStack(R.id.profile, false) // Pop if exists
+                            navController.navigate(R.id.profile) // Navigate only if not found
+                        }
                     }
                     R.id.notification -> {
                         Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show()
@@ -108,6 +131,16 @@ else->false
                 binding.myDrawerLayout.closeDrawer(GravityCompat.START) // Close drawer after selection
                 true
             }
+
+
+
+      navController.addOnDestinationChangedListener { _, destination, _ -> // handle the checked item
+          val menu = binding.navView.menu
+          for (i in 0 until menu.size()) {
+              val menuItem1 = menu.getItem(i)
+              menuItem1.isChecked = (menuItem1.itemId == destination.id)
+          }
+      }
 
 
 

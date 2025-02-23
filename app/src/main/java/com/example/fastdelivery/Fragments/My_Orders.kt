@@ -2,10 +2,10 @@ package com.example.fastdelivery.Fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +56,8 @@ class My_Orders : Fragment() {
                 Log.d("null","the categories are not null")
 
                 myordersadapter.updateOrders(newlist)
+                binding.myordersrecyclerview.visibility=View.VISIBLE
+                binding.shimmerLayoutOrders.visibility=View.GONE
                 // Handle the categories data, e.g., update a RecyclerView adapter
             } else             Log.d("null","the categories are null")
         }

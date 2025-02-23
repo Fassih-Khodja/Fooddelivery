@@ -74,54 +74,192 @@
         app:layout_constraintTop_toBottomOf="@id/viewpagerOffers"
         android:layout_marginTop="20dp"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewcategories"
+
+    <FrameLayout
+        android:id="@+id/containercategories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
         app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
-     app:layout_constraintTop_toBottomOf="@+id/CategoriesText"
+        app:layout_constraintTop_toBottomOf="@+id/CategoriesText"
         android:layout_marginTop="10dp"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        />
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewcategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:visibility="gone"
+            />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            >
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/shimmer_categorie_item_home"/>
+                    <include layout="@layout/shimmer_categorie_item_home"/>
+                    <include layout="@layout/shimmer_categorie_item_home"/>
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </HorizontalScrollView>
+
+    </FrameLayout>
+
+
+
+
+
+
     <TextView
         android:id="@+id/bestsellertext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Best Seller"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
-        app:layout_constraintTop_toBottomOf="@id/recyclerviewcategories"
+        app:layout_constraintTop_toBottomOf="@id/containercategories"
         android:layout_marginTop="15dp"
         android:textSize="20sp"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewbestseller"
+
+    <FrameLayout
+        android:id="@+id/containerbestseller"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
         app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
         app:layout_constraintTop_toBottomOf="@id/bestsellertext"
         android:layout_marginTop="10dp"
-        android:scrollbars="none"
-        />
+
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewbestseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guidlineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+            app:layout_constraintTop_toBottomOf="@id/bestsellertext"
+            android:scrollbars="none"
+            android:visibility="gone"
+            />
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    >
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_best_seller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <include layout="@layout/shimmer_bestseller_item_home"/>
+            <include layout="@layout/shimmer_bestseller_item_home"/>
+            <include layout="@layout/shimmer_bestseller_item_home"/>
+            <include layout="@layout/shimmer_bestseller_item_home"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</HorizontalScrollView>
+
+
+
+
+
+    </FrameLayout>
+
+
+
+
+
     <TextView
         android:id="@+id/foodtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Food"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
-        app:layout_constraintTop_toBottomOf="@id/recyclerviewbestseller"
+        app:layout_constraintTop_toBottomOf="@id/containerbestseller"
         android:layout_marginTop="20dp"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewfood"
+
+
+    <FrameLayout
+        android:id="@+id/containerfood"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
         app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
         app:layout_constraintTop_toBottomOf="@id/foodtext"
-        />
+        android:layout_marginTop="10dp"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewfood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guidlineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidlineEnd"
+            app:layout_constraintTop_toBottomOf="@id/foodtext"
+            android:visibility="gone"
+            />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_foods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <include layout="@layout/shimmer_item_foods_home"/>
+                <include layout="@layout/shimmer_item_foods_home"/>
+                <include layout="@layout/shimmer_item_foods_home"/>
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+    </FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

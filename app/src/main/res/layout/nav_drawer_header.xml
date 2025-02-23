@@ -10,7 +10,7 @@
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/photo_de_profil"
+        android:src="@drawable/test"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
 

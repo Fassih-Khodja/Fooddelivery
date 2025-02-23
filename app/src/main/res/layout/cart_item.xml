@@ -38,6 +38,20 @@
         android:layout_marginStart="20dp"/>
 
     <ImageButton
+        android:id="@+id/x_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/foodname"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/x_delete_btn"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        />
+
+    <ImageButton
         android:id="@+id/minusbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

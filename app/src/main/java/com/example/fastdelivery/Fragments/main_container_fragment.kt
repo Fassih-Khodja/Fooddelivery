@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -26,7 +26,7 @@ class main_container_fragment : Fragment() {
     private lateinit var binding: FragmentMainContainerFragmentBinding
     private lateinit var navController: NavController
 private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    val model: shared_VM_ActNav_FragFoodDetails by viewModels()
+    val model: shared_VM_ActNav_FragFoodDetails by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

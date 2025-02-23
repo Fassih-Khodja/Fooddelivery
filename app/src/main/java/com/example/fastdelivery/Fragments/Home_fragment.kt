@@ -102,6 +102,8 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
             Log.d("null","the categories are not null")
 
             categoriesAdapter.updateCategories(categories)
+            binding.recyclerviewcategories.visibility=View.VISIBLE
+            binding.shimmerLayoutCategories.visibility=View.GONE
             // Handle the categories data, e.g., update a RecyclerView adapter
         } else             Log.d("null","the categories are null")
 
@@ -127,6 +129,8 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
             Log.d("null","the food are not null")
 
             foodAdapter.updatefoods(foods)
+            binding.recyclerviewfood.visibility=View.VISIBLE
+            binding.shimmerLayoutFoods.visibility=View.GONE
             // Handle the categories data, e.g., update a RecyclerView adapter
         } else             Log.d("null","the food are null")
 
@@ -151,12 +155,14 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
             Log.d("null","the food are not null")
 
             BestsellerAdapter.updatebestsellers(bestsellers)
+            binding.recyclerviewbestseller.visibility=View.VISIBLE
+            binding.shimmerLayoutBestSeller.visibility=View.GONE
             // Handle the categories data, e.g., update a RecyclerView adapter
         } else             Log.d("null","the food are null")
 
     }
 
-
+/*
     if (model.categorieslist.value == null) { // i can this without condition on the onCreateView
         Log.d("fetchData","the fetchData is called ")
         model.fetchData() // Only fetch data if it's not already available
@@ -165,7 +171,9 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     if (model.foodlist.value == null) { // i can this without condition on the onCreateView
         Log.d("fetchData2 ","the fetchData2 is called ")
         model.fetchData2() // Only fetch data if it's not already available
-    }
+    } */
+
+
 
 
 

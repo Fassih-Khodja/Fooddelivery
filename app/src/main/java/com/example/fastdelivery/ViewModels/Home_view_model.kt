@@ -14,6 +14,13 @@ import kotlinx.coroutines.launch
 class Home_view_model (private val CategoryRepo : Categorie_repository,
     private val FoodRepo:Food_repository):ViewModel() {
 
+        init {
+            fetchData()
+            fetchData2()
+        }
+
+
+
     val categorieslist = MutableLiveData<List<Categorie_food>?>()
 
     var foodlistAll= ArrayList<Food>() // the list this who is not a livedata is the result of the fetch , but not the one who gonna display on the screen
@@ -35,6 +42,8 @@ class Home_view_model (private val CategoryRepo : Categorie_repository,
             }
         }
     }*/
+
+
    fun fetchData(){
        viewModelScope.launch { // this create coroutine
            val data=CategoryRepo.fetchCategories().toMutableList()

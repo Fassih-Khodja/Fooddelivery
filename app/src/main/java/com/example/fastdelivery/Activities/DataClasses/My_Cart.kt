@@ -15,6 +15,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fastdelivery.Adapters.MyCartAdapter
@@ -24,6 +25,7 @@ import com.example.fastdelivery.Models.DataClasses.Cart
 import com.example.fastdelivery.Models.DataClasses.Orders
 import com.example.fastdelivery.Models.Repositories.OrdersFetch_repository
 import com.example.fastdelivery.Models.Repositories.Orderschange_repository
+import com.example.fastdelivery.R
 import com.example.fastdelivery.ViewModels.MyOrders_view_model
 import com.example.fastdelivery.databinding.ActivityMyCartBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -39,7 +41,6 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
     private lateinit var model: MyOrders_view_model
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var spannable: Spannable
-    private lateinit var location:Location
     val db = FirebaseFirestore.getInstance()
     val auth= FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +76,11 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
             setSpan(UnderlineSpan(), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)}
         binding.editTextBtn.text = spannable
 
+
+  spannable = SpannableString(binding.editItemsText.text).apply {
+            setSpan(UnderlineSpan(), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)}
+        binding.editItemsText.text = spannable
+
         val ordersrepo= OrdersFetch_repository(db,auth.currentUser!!.uid)
         val orderschangerepo= Orderschange_repository(db,auth.currentUser!!.uid)
         model= ViewModelProvider(this, MyOrders_view_model.Factory(ordersrepo,orderschangerepo)).get(
@@ -103,6 +109,35 @@ class My_Cart : AppCompatActivity(), OnCartItemChangeQuantity {
             resultLauncher.launch(intent)
         }
 
+        binding.editItemsText.setOnClickListener {
+if (binding.editItemsText.text=="EDIT ITEMS") Log.d("edit","edit text")
+            if ((binding.editItemsText.text.toString()=="EDIT ITEMS" && cartlist.isNotEmpty())|| binding.editItemsText.text.toString()=="DONE"){
+                cartadapter.tooglemode()
+
+                val newText = if (cartadapter.isEditMode) "DONE" else "EDIT ITEMS"
+            val newColor = if (cartadapter.isEditMode) ContextCompat.getColor(this, R.color.green)
+            else ContextCompat.getColor(this, R.color.edit_text)
+            val newSpannable = SpannableString(newText).apply {
+                setSpan(UnderlineSpan(), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+
+            // Fade out animation
+            binding.editItemsText.animate()
+                .alpha(0f) // Fade out
+                .setDuration(150)
+                .withEndAction {
+                    binding.editItemsText.text = newSpannable
+                    binding.editItemsText.setTextColor(newColor)
+
+
+                    // Fade in animation
+                    binding.editItemsText.animate()
+                        .alpha(1f) // Fade back in
+                        .setDuration(150)
+                        .start()
+                }
+                .start()
+        }}
 
     }
 

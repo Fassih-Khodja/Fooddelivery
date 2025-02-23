@@ -18,6 +18,9 @@
         android:theme="@style/Theme.FastDelivery"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.DataClasses.Edit_Profile"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DataClasses.Add_Location"
             android:exported="false" />
         <activity
