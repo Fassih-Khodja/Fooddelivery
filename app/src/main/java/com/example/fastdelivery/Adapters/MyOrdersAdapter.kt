@@ -8,9 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.fastdelivery.Models.DataClasses.Categorie_food
 import com.example.fastdelivery.Models.DataClasses.Orders
 import com.example.fastdelivery.R
+
 class MyOrdersAdapter(var l:List<Orders>):RecyclerView.Adapter<OrdersViewHolde>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolde {
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.orders_recyclerview_item,parent,false)
@@ -29,7 +29,8 @@ class MyOrdersAdapter(var l:List<Orders>):RecyclerView.Adapter<OrdersViewHolde>(
                 .inflate(R.layout.order_cart_item, holder.linearlayout, false)
             order_cart_item.findViewById<TextView>(R.id.foodname).text=order.name
             order_cart_item.findViewById<TextView>(R.id.foodpricetotal).text=order.price.toString()
-            order_cart_item.findViewById<ImageView>(R.id.foodimage).load(order.imageUrl)
+            order_cart_item.findViewById<ImageView>(R.id.foodimage).load(order.imageUrl){
+            }
             holder.linearlayout.addView(order_cart_item)
         }
     }

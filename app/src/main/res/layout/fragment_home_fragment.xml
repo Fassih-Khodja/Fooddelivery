@@ -40,7 +40,7 @@
         android:id="@+id/welcometext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome "
+        android:text="Hey "
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/guidlineStart"
         android:textSize="16sp"
@@ -51,7 +51,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/welcometext"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="NAME"
+        android:text="Fassih ,"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/nametext"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text=" Good afternoon "
         android:textStyle="bold"
         android:textSize="16sp"
         />

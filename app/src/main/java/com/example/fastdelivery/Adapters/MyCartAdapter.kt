@@ -29,7 +29,8 @@ class MyCartAdapter(var l:MutableList<Cart>,private  val listner:OnCartItemChang
         holder.name.text= l.get(position).name
         holder.price.text= (l.get(position).price*l.get(position).quantity ).toString()
         holder.quantity.text=l.get(position).quantity.toString()
-        holder.image.load(l[position].imageUrl)
+        holder.image.load(l[position].imageUrl){
+        }
         if (isEditMode) {
             holder.deletebtn.apply {
                 visibility = View.VISIBLE

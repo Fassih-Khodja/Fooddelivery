@@ -26,7 +26,8 @@ class bestsellerAdapter(var l:List<Food>?, private val listner:bestselleronitemc
 
     override fun onBindViewHolder(holder: bestsellerviewholder, position: Int) {
         holder.name.text = l?.get(position)?.name ?: ""
-        holder.image.load(l?.get(position)?.imageUrl)
+        holder.image.load(l?.get(position)?.imageUrl){
+        }
        holder.image.transitionName = "image_b${position}" // il faux changer le faix de +100 , il faux de trouver une autre method
         holder.itemView.setOnClickListener {
 

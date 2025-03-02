@@ -60,14 +60,15 @@ class FoodDetails_Child : Fragment() {
         binding.imageFoodDetail.transitionName = "image_$position"}
         else if(source=="bestseller") {
             binding.imageFoodDetail.transitionName = "image_b$position"
-        }else {
+        }else if (source=="searchlist") {
             binding.imageFoodDetail.transitionName = "image_s$position"
+        } else if (source =="favoritelist"){
+            binding.imageFoodDetail.transitionName = "image_f$position"
         }
-        binding.imageFoodDetail.load(item_dataclass?.imageUrl)
+        binding.imageFoodDetail.load(item_dataclass?.imageUrl){
+        }
         binding.nameFoodDetails.text=item_dataclass?.name
         binding.totalpriceFoodDetail.text=item_dataclass?.price.toString()
-
-
         return binding.root
     }
 
@@ -149,9 +150,5 @@ Log.d("curentimage",currentImage.toString())
         }
 
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

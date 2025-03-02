@@ -55,6 +55,15 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/test"
         />
+    <ImageButton
+        android:id="@+id/edit_photo_profile_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/photo_profile"
+        app:layout_constraintEnd_toEndOf="@id/photo_profile"
+        android:src="@drawable/edit_icon_photo_profile"
+        android:background="@android:color/transparent"
+        />
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="0dp"
@@ -94,6 +103,7 @@
                 android:layout_marginTop="4dp"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullnamenputedittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -138,6 +148,7 @@
                 android:layout_marginTop="4dp"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailinputedittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -182,6 +193,7 @@
                 android:layout_marginTop="4dp"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phonenumberinputedittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -225,6 +237,7 @@
                 android:layout_marginTop="4dp"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bioinputedittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="enter your email"

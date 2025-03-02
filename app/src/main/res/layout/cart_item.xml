@@ -11,6 +11,7 @@
         android:src="@drawable/introimage2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/ImageView.Corner"/>
 
     <TextView

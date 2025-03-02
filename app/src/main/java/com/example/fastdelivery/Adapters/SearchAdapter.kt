@@ -22,7 +22,9 @@ class SearchAdapter (var l:List<Food>?,private val listner:searchitemclicklistne
 
     override fun onBindViewHolder(holder: Searchviewholder, position: Int) {
 
-        holder.image.load(l?.get(position)?.imageUrl)
+        holder.image.load(l?.get(position)?.imageUrl){
+
+        }
         holder.name.text= filteredList?.get(position)?.name ?: ""
          holder.image.transitionName = "image_s$position"
         holder.itemView.setOnClickListener {

@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.fastdelivery.Fragments.Home_fragment
 import com.example.fastdelivery.Models.DataClasses.Food
 import com.example.fastdelivery.R
 
@@ -26,7 +25,8 @@ class FoodAdapter(var l:List<Food>?, private  val listner:FoodonItemClickListner
 
     override fun onBindViewHolder(holder: Foodviewholder, position: Int) {
 
-        holder.image.load(l?.get(position)?.imageUrl)
+        holder.image.load(l?.get(position)?.imageUrl){
+        }
         holder.name.text= l?.get(position)?.name ?: ""
         holder.price.text= l?.get(position)?.price.toString()
         holder.image.transitionName = "image_$position"

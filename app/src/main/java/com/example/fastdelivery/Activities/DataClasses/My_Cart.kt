@@ -139,6 +139,11 @@ if (binding.editItemsText.text=="EDIT ITEMS") Log.d("edit","edit text")
                 .start()
         }}
 
+        binding.backBtnCart.setOnClickListener {
+            finish()
+        }
+
+
     }
 
     private fun getcurrentlocation() {
@@ -158,7 +163,7 @@ if (binding.editItemsText.text=="EDIT ITEMS") Log.d("edit","edit text")
         } else {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
-               setlocation(location)
+                if (location!=null) setlocation(location)
             }
             .addOnFailureListener { e ->
                 Log.e("Location Error", "Failed to get location: ${e.message}")
