@@ -47,7 +47,7 @@ private lateinit var binding:FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val catrepository = Categorie_repository(firestore)
-        val foodrepository= Food_repository(firestore)
+        val foodrepository= Food_repository(firestore,requireContext().applicationContext)
         model= ViewModelProvider(requireActivity(), Home_view_model.Factory(catrepository,foodrepository)).get(Home_view_model::class.java)
         // using require activity i don't have to fetch again the foodlist
 

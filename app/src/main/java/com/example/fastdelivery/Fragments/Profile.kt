@@ -1,7 +1,9 @@
 package com.example.fastdelivery.Fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -69,7 +71,9 @@ class Profile : Fragment() {
             setSpan(UnderlineSpan(), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)}
         binding.editProfText.text = spannable
 
-
+        val sharedPreferences = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val savedUri = sharedPreferences.getString("saved_image_uri", null)
+        binding.profileImage.setImageURI(Uri.parse(savedUri))
 
         binding.editProfText.setOnClickListener {
             val intent= Intent(requireContext(),Edit_Profile::class.java)

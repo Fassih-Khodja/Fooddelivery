@@ -23,15 +23,32 @@
         <menu>
             <item
                 android:title="Settings"
-                android:id="@+id/settings"/>
+                android:id="@+id/settings"
+                android:icon="@drawable/setting_ic"/>
             <item
                 android:title="About us"
-                android:id="@+id/about_us"/>
+                android:id="@+id/about_us"
+                android:icon="@drawable/about_us_ic"/>
             <item
                 android:title="privacy policy"
-                android:id="@+id/privacy"/>
+                android:id="@+id/privacy"
+                android:icon="@drawable/about_us_ic"/>
+
         </menu>
 
     </item>
+    <item
+        android:title=""
+        >
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:title="Logout"
+                android:icon="@drawable/logout_ic"/>
+
+        </menu>
+    </item>
+
+
 
 </menu>

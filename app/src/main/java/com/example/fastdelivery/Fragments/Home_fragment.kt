@@ -72,7 +72,7 @@ class Home_fragment : Fragment(), onItemClickListner,FoodonItemClickListner,best
     Log.d("test fragment","the fragment has been created view 2.. ")
     // initialize of repositories
     val catrepository = Categorie_repository(firestore)
-    val foodrepository=Food_repository(firestore)
+    val foodrepository=Food_repository(firestore,requireContext().applicationContext)
 
 
 

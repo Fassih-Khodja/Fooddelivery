@@ -1,26 +1,42 @@
 package com.example.fastdelivery.Activities.DataClasses
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.credentials.exceptions.ClearCredentialException
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.fastdelivery.R
 import com.example.fastdelivery.ViewModels.Navigation_User_VM
 import com.example.fastdelivery.ViewModels.shared_VM_ActNav_FragFoodDetails
 import com.example.fastdelivery.databinding.ActivityNavigationBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import kotlinx.coroutines.launch
+
 
 // remarque , i'm using nvigation component to navigate ...
 
 class Navigation_Activity : AppCompatActivity() {
     lateinit var binding: ActivityNavigationBinding
     private lateinit var navController: NavController
-
+    private lateinit var auth: FirebaseAuth
     // setting up the viewmodel
      val model: shared_VM_ActNav_FragFoodDetails by viewModels()
     val user_model:Navigation_User_VM by viewModels()
@@ -66,11 +82,25 @@ class Navigation_Activity : AppCompatActivity() {
         val headerView= binding.navView.getHeaderView(0) // Get header view
         val headername: TextView = headerView.findViewById(R.id.user_name_text_nav_draw)
  val headeremail: TextView = headerView.findViewById(R.id.user_email_text_nav_draw)
+        val headerimage:ImageView =headerView.findViewById(R.id.photo_profile_nav_drawer)
 
 
 
         user_model.userInfo.observe(this){ user ->
             if (user != null) {
+
+                val imageuri=getregisterimage()
+                Log.d("uri",imageuri.toString())
+
+                if(imageuri!=null){
+                    Log.d("yeah","yeah it's not null")
+                    try {
+                        val uri = Uri.parse(imageuri)
+                        headerimage.setImageURI(uri)
+                    } catch (e: Exception) {
+                        Log.e("ImageError", "Failed to load image: ${e.message}")
+                       // headerimage.setImageResource(R.drawable.default_profile) // Use a default image
+                    }} else  Log.d("yeah","yeah it's null")
                 headername.text = user.full_name
                 headeremail.text = user.email
             }
@@ -126,7 +156,10 @@ class Navigation_Activity : AppCompatActivity() {
                     R.id.notification -> {
                         Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show()
                     }
-else->false
+                    R.id.logout->{
+                        showLogoutDialog()
+                    }
+                    else -> false
                 }
                 binding.myDrawerLayout.closeDrawer(GravityCompat.START) // Close drawer after selection
                 true
@@ -147,21 +180,61 @@ else->false
 
     }
 
+    private fun showLogoutDialog() {
+      val dialog=  AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                auth = Firebase.auth
+                auth.signOut()
+                dialog.dismiss()
+                lifecycleScope.launch {
+                    try {
+                        val credentialManager = CredentialManager.create(applicationContext)
+                        val clearRequest = ClearCredentialStateRequest()
+                        credentialManager.clearCredentialState(clearRequest)
+
+                    } catch (e: ClearCredentialException) {
+                        Log.e(TAG, "Couldn't clear user credentials: ${e.localizedMessage}")
+                    }
+                }
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
 
 
 
 
-
-      /*  fun isFragmentInBackstack(navController: NavController, destinationId: Int): Boolean {
-            return try {
-                navController.getBackStackEntry(destinationId)
-                Log.d("it's true","true")
-
-                true // If no exception, the fragment is in the backstack
-            } catch (e: IllegalArgumentException) {
-                false // If exception is thrown, the fragment is not in the backstack
             }
-        }*/
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        dialog.setOnShowListener {
+            // Change the color of the buttons
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this, R.color.red))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this, R.color.gray))
+        }
+        dialog.show()
+    }
+
+    private fun getregisterimage(): String? {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val savedUri = sharedPreferences.getString("saved_image_uri", null)
+        return savedUri
+    }
+
+
+    /*  fun isFragmentInBackstack(navController: NavController, destinationId: Int): Boolean {
+          return try {
+              navController.getBackStackEntry(destinationId)
+              Log.d("it's true","true")
+
+              true // If no exception, the fragment is in the backstack
+          } catch (e: IllegalArgumentException) {
+              false // If exception is thrown, the fragment is not in the backstack
+          }
+      }*/
 
 
     /*   navView.setOnItemSelectedListener { item ->

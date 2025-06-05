@@ -9,12 +9,14 @@ import com.example.fastdelivery.Models.DataClasses.Categorie_food
 import com.example.fastdelivery.Models.DataClasses.Food
 import com.example.fastdelivery.Models.Repositories.Categorie_repository
 import com.example.fastdelivery.Models.Repositories.Food_repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Home_view_model (private val CategoryRepo : Categorie_repository,
     private val FoodRepo:Food_repository):ViewModel() {
 
-        init {
+
+    init {
             fetchData()
             fetchData2()
         }
@@ -59,6 +61,9 @@ class Home_view_model (private val CategoryRepo : Categorie_repository,
             if (data != null) {
                 foodlistAll = data as ArrayList<Food>
                 createfoodcategory("All")
+                viewModelScope.launch(Dispatchers.IO) {
+                    FoodRepo.insertFoods(data)
+                }
             }
         }
     }

@@ -1,10 +1,15 @@
 package com.example.fastdelivery.Models.Repositories
 
+import android.content.Context
 import android.util.Log
+import com.example.fastdelivery.DAO.AppDataBase
+import com.example.fastdelivery.DAO.FoodDAO
 import com.example.fastdelivery.Models.DataClasses.Food
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Food_repository (private val db: FirebaseFirestore) {
+class Food_repository (private val db: FirebaseFirestore, private val ctx:Context) {
+    private val foodDao: FoodDAO = AppDataBase.getDatabase(ctx).foodDao()
+
     // the repository is just for the intruction with the database , the filter is doing on the viewmodel
     fun fetchFood(callback: (List<Food>?) -> Unit) {
         Log.d("fetchCategories","the fetchFood get called")
@@ -26,6 +31,11 @@ class Food_repository (private val db: FirebaseFirestore) {
                 Log.d("fetchCategories","the fetchFood faillure")
                 callback(null)
             }
+    }
+
+     fun insertFoods(foods: List<Food>) {
+        foodDao.insertallthelist(foods)
+        Log.d("insertfood","the insert done")
     }
 
 
